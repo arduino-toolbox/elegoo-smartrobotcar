@@ -1,1 +1,0 @@
-# elegoo-smartrobotcar
