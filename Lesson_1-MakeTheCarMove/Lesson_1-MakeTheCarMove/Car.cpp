@@ -51,65 +51,52 @@ int Car::blink(int seconds) {
 int Car::println(char *line) {
   return 0;
 }
-int Car::move(Side side, Direction direction, int speed = 100, int seconds = 500) {
-  int power;
+int Car::move(Side side, Direction direction, int speed = 300, int seconds = 500) {
+  speed = direction == forward ? HIGH : LOW;
 
-  switch (direction)
-  {
-    case forward: power = HIGH; framework.println("Car::move: forward");  break;
-    case back: power = LOW; framework.println("Car::move: back");  break;
-  }
-
-  switch (side)
-  {
-    case both: framework.println("Car::move: set power and speed both"); break;
-    case left: framework.println("Car::move: set power and speed left"); break;
-    case right: framework.println("Car::move: set power and speed left"); break;
-  }
-
-  switch (side)
-  {
-    case both:
-    case left:
-      digitalWrite(ENA + 1, power);
-      digitalWrite(ENA + 2, 1 - power);
-      break;
-  }
-
-  switch (side)
-  {
-    case both:
-    case right:
-      digitalWrite(ENB + 1, power);
-      digitalWrite(ENB + 2, 1 - power);
-      break;
-  }
+  framework.println("move");
 
   switch (side)
   {
     case left:
-      analogWrite(ENA, speed);
+      digitalWrite(ENA + 1, speed); digitalWrite(ENA + 2, 1 - speed);
       break;
     case right:
-      analogWrite(ENB, speed);
+      digitalWrite(ENB + 1, speed); digitalWrite(ENB + 2, 1 - speed);
       break;
     case both:
-      analogWrite(ENA, speed);
-      analogWrite(ENB, speed);
+      digitalWrite(ENA + 1, speed); digitalWrite(ENA + 2, 1 - speed);
+      digitalWrite(ENB + 1, speed); digitalWrite(ENB + 2, 1 - speed);
       break;
   }
 
+  framework.println("motor on");
+  switch (side)
+  {
+    case left:
+      digitalWrite(ENA, HIGH);
+      break;
+    case right:
+      digitalWrite(ENB, HIGH);
+      break;
+    case both:
+      digitalWrite(ENA, HIGH);
+      digitalWrite(ENB, HIGH);
+      break;
+  }
 
-  return 0;
+  delay(seconds);
 }
-int Car::stop(int seconds = 0) {
+int Car::stop(int seconds = 500) {
+  framework.println("Car::stop");
+
   digitalWrite(ENA + 1, LOW);
   digitalWrite(ENA + 2, LOW);
   digitalWrite(ENB + 1, LOW);
   digitalWrite(ENB + 2, LOW);
 
-  analogWrite(ENA, 0);
-  analogWrite(ENB, 0);
+  digitalWrite(ENA, LOW);
+  digitalWrite(ENB, LOW);
 
   delay(seconds);
 }
@@ -130,49 +117,42 @@ int Car::turn_left(int seconds = 1000) {
 int Car::drive_auto() {
   framework.println("Car::drive_auto");
 
-  drive_forward(1000);
-  stop(500);
-
-  turn_right(1000);
-  stop(500);
-
-  drive_forward(1000);
-  stop(500);
-
-  turn_right(1000);
-  stop(500);
-
-  drive_forward(1000);
-  stop(500);
-
-  turn_right(1000);
-  stop(500);
-
-  drive_forward(1000);
-  stop(500);
-
-  turn_right(1000);
-  stop(500);
-
-  stop(500);
+  drive_forward();  stop();
+  turn_right();     stop();
+  drive_forward();  stop();
+  turn_right();     stop();
+  drive_forward();  stop();
+  turn_right();     stop();
+  drive_forward();  stop();
+  turn_right();     stop();
 
   return 0;
 }
-
 int Car::selftest() {
+  int speed;
+
   framework.println("Car::selftest");
 
-  drive_forward(2000);
-  stop(2000);
+  /**/
+  digitalWrite(ENA, LOW);
+  digitalWrite(ENB, LOW);
 
-  drive_back(1000);
-  stop(2000);
+  framework.println("Car::selftest basetest left");
+  move(left, forward);
+  move(left, back);
+  stop(1000);
 
-  turn_right(2000);
-  stop(2000);
+  framework.println("Car::selftest basetest both");
+  move(both, forward);
+  move(both, back);
+  stop(1000);
 
-  turn_left(2000);
-  stop(2000);
+  framework.println("Car::selftest basetest right");
+  move(right, forward);
+  move(right, back);
+  stop(1000);
+
+
 
   return 0;
 }

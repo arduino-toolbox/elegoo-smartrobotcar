@@ -19,10 +19,9 @@ void setup(void)
 void loop()
 {
   framework.blink(100);
-
-  car.setup(); 
-  /* car.selftest();
-   */
+ 
+  /* car.selftest(); */
   
   car.drive_auto();
+
 }
