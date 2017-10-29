@@ -23,5 +23,4 @@ void loop()
   /* car.selftest(); */
   
   car.drive_auto();
-
 }
