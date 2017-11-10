@@ -17,20 +17,23 @@
 
 class Framework
 {
-public:
-public:
+  public:
 	Framework();
 	virtual ~Framework();
 
+	int setup();
+	int println(char line[]);
 
-  int setup();
-	int blink(int seconds);
+	int blink(int seconds = 100);
+	int setstate(int state, int seconds = 100);
+	int changestate(int seconds = 100);
+	
+	int BLINK_CHANGESTATE = -1;
 
- int println(char* line);
-
-private:
+  private:
 	//  VARIABLES
-	uint8_t pin;
+	uint8_t PIN;
+	int state;
 
 	//  CONSTANTS
 };

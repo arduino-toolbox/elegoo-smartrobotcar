@@ -28,7 +28,7 @@ class Car
     int stop(int seconds = 500);
 
     int blink(int seconds);
-    int println(char *line);
+    int println(char line[]);
 
     int drive_forward(int seconds = 1000);
     int drive_back(int seconds = 1000);

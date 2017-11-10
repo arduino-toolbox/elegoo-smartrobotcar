@@ -50,7 +50,7 @@ int Car::blink(int seconds)
 
 	return 0;
 }
-int Car::println(char *line)
+int Car::println(char line[])
 {
 	return 0;
 }
@@ -155,7 +155,7 @@ int Car::drive_auto()
 }
 int Car::selftest()
 {
-	int speed;
+	int speed = 1000;
 
 	framework.println("Car::selftest");
 
@@ -166,17 +166,17 @@ int Car::selftest()
 	framework.println("Car::selftest basetest left");
 	move(left, forward);
 	move(left, back);
-	stop(1000);
+	stop(speed);
 
 	framework.println("Car::selftest basetest both");
 	move(both, forward);
 	move(both, back);
-	stop(1000);
+	stop(speed);
 
 	framework.println("Car::selftest basetest right");
 	move(right, forward);
 	move(right, back);
-	stop(1000);
+	stop(speed);
 
 	return 0;
 }

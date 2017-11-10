@@ -9,18 +9,15 @@
 
 Framework framework;
 Car car;
+Bluetooth bluetooth;
 
 void setup(void)
 {
-  framework.setup();
-  car.setup();
+	framework.setup();
+	car.setup();
 }
 
 void loop()
 {
-  framework.blink(100);
- 
-  /* car.selftest(); */
-  
-  car.drive_auto();
+	bluetooth.blink(100);
 }
