@@ -26,7 +26,7 @@ int Infrared::setup()
 
 	return 0;
 }
-int Infrared::println(char line[])
+int Infrared::println(const char *line)
 {
 	return 0;
 }
@@ -38,8 +38,11 @@ int Infrared::respondtosignal()
 	if (irrecv.decode(&results))
 	{
 		val = results.value;
+
+		Serial.print("val=");
 		Serial.println(val);
-		irrecv.resume(); // Receive the next value
+
+		irrecv.resume();
 		delay(150);
 		
 		if (val == L)

@@ -27,14 +27,14 @@ int Framework::setup()
 	return 0;
 }
 
-int Framework::println(char line[])
+int Framework::println(const char *line)
 {
 	Serial.println(line);
 
 	return 0;
 }
 
-int Framework::setstate(int state = HIGH, int seconds = 100) {
+int Framework::setstate(int state, int seconds = 100) {
 	digitalWrite(LED_BUILTIN, state);
 	delay(seconds);
 

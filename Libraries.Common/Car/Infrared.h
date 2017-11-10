@@ -21,7 +21,7 @@ class Infrared
 	int setup();
 	int respondtosignal();
 
-	int println(char *line);
+	int println(const char *line);
 
 	int selftest();
 

@@ -22,7 +22,7 @@ class Framework
 	virtual ~Framework();
 
 	int setup();
-	int println(char line[]);
+	int println(const char* line);
 
 	int blink(int seconds = 100);
 	int setstate(int state, int seconds = 100);

@@ -115,7 +115,8 @@ IRrecv::IRrecv (int recvpin, int blinkpin)
 //+=============================================================================
 // initialization
 //
-void  IRrecv::enableIRIn ( ) {
+void  IRrecv::enableIRIn ( )
+{
 	cli();
 	// Setup pulse clock timer interrupt
 	// Prescale /8 (16M/8 = 0.5 microseconds per tick)
@@ -141,7 +142,8 @@ void  IRrecv::enableIRIn ( ) {
 //+=============================================================================
 // Enable/disable blinking of pin 13 on IR processing
 //
-void  IRrecv::blink13 (int blinkflag) {
+void  IRrecv::blink13 (int blinkflag)
+{
 	irparams.blinkflag = blinkflag;
 	if (blinkflag)  pinMode(BLINKLED, OUTPUT) ;
 }
