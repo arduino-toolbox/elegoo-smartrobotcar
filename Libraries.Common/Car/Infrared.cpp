@@ -12,17 +12,21 @@ IRrecv irrecv(PIN); //initialization
 
 Infrared::Infrared()
 {
+	framework.println("Infrared::Infrared()");
+
 	pinMode(LED_BUILTIN, OUTPUT);
 }
 Infrared::~Infrared()
 {
-	// Destructor stub
+	framework.println("Infrared::~Infrared()");
 }
 
 int Infrared::setup()
 {
 	pinMode(LED_BUILTIN, OUTPUT);
-	irrecv.enableIRIn(); // Start receiving
+	irrecv.enableIRIn();
+
+	framework.println("Infrared::setup");
 
 	return 0;
 }
@@ -35,18 +39,23 @@ int Infrared::respondtosignal()
 {
 	int val;
 
-	if (irrecv.decode(&results))
+	rc=irrecv.decode(&results);
+
+	if (rc)
 	{
 		val = results.value;
 
-		Serial.print("val=");
+		Serial.print("rc=");
+		Serial.print(rc);
+		Serial.print(" val=");
 		Serial.println(val);
 
 		irrecv.resume();
-		delay(150);
+		delay(100);
 		
 		if (val == L)
 		{
+			framework.println("Infrared::respondtosignal: changestate");
 			framework.changestate();
 		}
 	}

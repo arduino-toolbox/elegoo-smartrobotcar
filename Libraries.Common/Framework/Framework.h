@@ -25,7 +25,7 @@ class Framework
 	int println(const char* line);
 
 	int blink(int seconds = 100);
-	int setstate(int state, int seconds = 100);
+	int setstate(int state, int seconds);
 	int changestate(int seconds = 100);
 	
 	int BLINK_CHANGESTATE = -1;

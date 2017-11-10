@@ -19,16 +19,21 @@ int N2 = 8;  /* voilettt */
 
 Car::Car()
 {
+	framework.println("Car::Car");
 	pinMode(LED_BUILTIN, OUTPUT);
 }
 
 Car::~Car()
 {
+	framework.println("Car::~Car");
+	
 	// Destructor stub
 }
 
 int Car::setup()
 {
+	framework.println("Car::setup");
+
 	pinMode(N1, OUTPUT);
 	pinMode(N2, OUTPUT);
 	pinMode(N3, OUTPUT);
@@ -54,7 +59,7 @@ int Car::println(char line[])
 {
 	return 0;
 }
-int Car::move(Side side, Direction direction, int speed = 300, int seconds = 500)
+int Car::move(Side side, Direction direction, int speed, int seconds)
 {
 	speed = direction == forward ? HIGH : LOW;
 
@@ -96,7 +101,7 @@ int Car::move(Side side, Direction direction, int speed = 300, int seconds = 500
 	delay(seconds);
 	return 0;
 }
-int Car::stop(int seconds = 500)
+int Car::stop(int seconds)
 {
 	framework.println("Car::stop");
 
@@ -112,20 +117,20 @@ int Car::stop(int seconds = 500)
 
 	return 0;
 }
-int Car::drive_forward(int seconds = 1000)
+int Car::drive_forward(int seconds)
 {
 	return move(both, forward, 200, seconds);
 }
-int Car::drive_back(int seconds = 1000)
+int Car::drive_back(int seconds)
 {
 	return move(both, back, 200, seconds);
 }
-int Car::turn_right(int seconds = 1000)
+int Car::turn_right(int seconds)
 {
 	framework.println("Car::turn_right");
 	return move(right, forward, 200, seconds);
 }
-int Car::turn_left(int seconds = 1000)
+int Car::turn_left(int seconds)
 {
 	framework.println("Car::turn_left");
 	return move(left, forward, 200, seconds);

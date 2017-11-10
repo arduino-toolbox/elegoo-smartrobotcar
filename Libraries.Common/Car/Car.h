@@ -22,7 +22,7 @@ class Car
 
     int setup();
 
-    int move(Side side, Direction direction, int speed, int seconds);
+    int move(Side side, Direction direction, int speed = 100, int seconds = 100);
 
     int move(int leftBack, int leftForward, int rightBack, int rightForward, char *direction, int seconds = 1000);
     int stop(int seconds = 500);

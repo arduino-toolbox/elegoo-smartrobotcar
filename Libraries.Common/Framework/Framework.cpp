@@ -34,14 +34,14 @@ int Framework::println(const char *line)
 	return 0;
 }
 
-int Framework::setstate(int state, int seconds = 100) {
+int Framework::setstate(int state, int seconds) {
 	digitalWrite(LED_BUILTIN, state);
 	delay(seconds);
 
 	return 0;
 }
 
-int Framework::blink(int seconds = 100)
+int Framework::blink(int seconds)
 {
 	Serial.println("Framework::blink");
 
@@ -50,7 +50,7 @@ int Framework::blink(int seconds = 100)
 	
 	return 0;
 }
-int Framework::changestate(int seconds = 100)
+int Framework::changestate(int seconds)
 {
 	Serial.println("Framework::changestate");
 
