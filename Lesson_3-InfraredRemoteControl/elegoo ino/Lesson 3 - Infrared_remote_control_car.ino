@@ -12,13 +12,9 @@ int ENB=11;
 int ABS=150;
 unsigned long RED;
 #define A 16736925
-
 #define B 16754775
-
 #define X 16712445
-
 #define C 16720605
-
 #define D 16761405
 
 IRrecv irrecv(receiverpin);
