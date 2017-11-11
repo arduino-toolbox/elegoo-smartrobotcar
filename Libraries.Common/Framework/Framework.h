@@ -22,6 +22,9 @@ class Framework
 	virtual ~Framework();
 
 	int setup();
+
+	int print(const char* line);
+
 	int println(const char* line);
 
 	int blink(int seconds = 100);

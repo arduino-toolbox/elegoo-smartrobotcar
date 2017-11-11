@@ -17,10 +17,6 @@ int ENA = 8; /* green   */
 int N1 = 9;  /* blue     */
 int N2 = 8;  /* voilettt */
 
-//
-int PIN = 12;
-IRrecv irrecv(PIN);
-
 Car::Car()
 {
 	framework.println("Car::Car");
@@ -49,7 +45,19 @@ int Car::setup()
 	//
 	infrared.setup();
 
+	default_speed = 100;
+	default_seconds = 100;
+
 	return 0;
+}
+
+int Car::set_default_speed(int speed)
+{
+	default_speed = speed;
+}
+int Car::set_default_seconds(int seconds)
+{
+	default_seconds = seconds;
 }
 int Car::blink(int seconds)
 {
@@ -70,7 +78,10 @@ int Car::move(Side side, Direction direction, int speed, int seconds)
 {
 	speed = direction == forward ? HIGH : LOW;
 
-	framework.println("move");
+	framework.print("Car::move ");
+	framework.print("speed="); Serial.print(speed);
+	framework.print(" direction="); Serial.print(direction);
+	framework.println("");
 
 	switch (side)
 	{
@@ -90,7 +101,6 @@ int Car::move(Side side, Direction direction, int speed, int seconds)
 		break;
 	}
 
-	framework.println("motor on");
 	switch (side)
 	{
 	case left:
@@ -105,6 +115,10 @@ int Car::move(Side side, Direction direction, int speed, int seconds)
 		break;
 	}
 
+	if (seconds == -1) {
+		seconds = default_seconds;
+	}
+	
 	delay(seconds);
 	return 0;
 }
@@ -126,10 +140,12 @@ int Car::stop(int seconds)
 }
 int Car::move_forward(int seconds)
 {
-	return move(both, forward, 200, seconds);
+	framework.println("Car::move_forward");
+	return move(both, forward, 100, seconds);
 }
 int Car::move_back(int seconds)
 {
+	framework.println("Car::move_back");
 	return move(both, back, 200, seconds);
 }
 int Car::move_right(int seconds)
@@ -166,42 +182,53 @@ int Car::drive_auto()
 	return 0;
 }
 
-int drive_remotecontrol()
+int Car::drive_remotecontrol()
 {
 	long key = infrared.check();
+	
+	if (key == 0) {
+		return 0;
+	}
+
+	framework.print("Car::drive_remotecontrol ");
 
 	switch (key)
 	{
+	default:
+		break;
 	case KEY_STAR:
-		Serial.print("*");
-		//stop();
+		framework.print("*: STOP ");
+		stop();
 		break;
 	case KEY_HASH:
-		Serial.print("#");
-		//stop();
+		framework.print("#: STOP ");
+		stop();
 		break;
 
 	case KEY_LEFT:
-		Serial.print("LEFT");
-		//move_left();
+		framework.print("<: LEFT ");
+		move_left(100);
 		break;
 	case KEY_RIGHT:
-		Serial.print("RIGHT");
-//		move_right();
+		framework.print(">: RIGHT");
+		move_right(100);
 		break;
 	case KEY_UP:
-		Serial.print("UP");
-		//move_forward();
+		framework.print("^: UP   ");
+		move_forward(100);
 		break;
 	case KEY_DOWN:
-		Serial.print("DOWN");
-		//move_back();
+		framework.print("V: DOWN ");
+		move_back(100);
 		break;
 
 	case KEY_OK:
-		Serial.print("OK");
+		framework.print("O: OK   ");
+		stop();
 		break;
 	}
+
+	framework.println("");
 
 	return key;
 }

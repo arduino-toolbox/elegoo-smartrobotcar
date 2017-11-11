@@ -1,19 +1,19 @@
 //www.elegoo.com
-//2016.09.23
+//2016.09.12
 
-int in1=6;
-int in2=7;
-int in3=8;
-int in4=9;
-int ENA=5;
-int ENB=11;
- int ABS=115;
+int in1=9;
+int in2=8;
+int in3=7;
+int in4=6;
+int ENA=10;
+int ENB=5;
+ int ABS=130;
  void _mForward()
 {
   analogWrite(ENA,ABS);
   analogWrite(ENB,ABS);
-  digitalWrite(in1,HIGH);//digital output
-  digitalWrite(in2,LOW);
+  digitalWrite(in1,LOW);
+  digitalWrite(in2,HIGH);
   digitalWrite(in3,LOW);
   digitalWrite(in4,HIGH);
   Serial.println("go forward!");
@@ -23,8 +23,8 @@ void _mBack()
 {
   analogWrite(ENA,ABS);
   analogWrite(ENB,ABS);
-  digitalWrite(in1,LOW);
-  digitalWrite(in2,HIGH);
+  digitalWrite(in1,HIGH);
+  digitalWrite(in2,LOW);
   digitalWrite(in3,HIGH);
   digitalWrite(in4,LOW);
   Serial.println("go back!");
@@ -34,10 +34,10 @@ void _mleft()
 {
    analogWrite(ENA,ABS);
    analogWrite(ENB,ABS);
-  digitalWrite(in1,HIGH);
-  digitalWrite(in2,LOW);
-  digitalWrite(in3,HIGH);
-  digitalWrite(in4,LOW); 
+   digitalWrite(in1,LOW);
+   digitalWrite(in2,HIGH);
+   digitalWrite(in3,HIGH);
+   digitalWrite(in4,LOW);
    Serial.println("go left!");
 }
 
@@ -45,10 +45,10 @@ void _mright()
 {
    analogWrite(ENA,ABS);
    analogWrite(ENB,ABS);
-  digitalWrite(in1,LOW);
-  digitalWrite(in2,HIGH);
-  digitalWrite(in3,LOW);
-  digitalWrite(in4,HIGH);
+   digitalWrite(in1,HIGH);
+   digitalWrite(in2,LOW);
+   digitalWrite(in3,LOW);
+   digitalWrite(in4,HIGH);
    Serial.println("go right!");
 } 
 void _mStop()
@@ -65,7 +65,7 @@ void setup()
 
 void loop() {
   int num1,num2,num3;
-  num1=digitalRead(10);    
+  num1=digitalRead(11);    
   num2=digitalRead(4);
   num3=digitalRead(2); 
    if((num1==0)&&num2&&num3) 

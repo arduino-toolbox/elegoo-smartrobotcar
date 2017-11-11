@@ -39,6 +39,9 @@ class Car
 	int blink(int seconds);
 	int println(char line[]);
 
+	int set_default_speed(int speed);
+	int set_default_seconds(int seconds);
+
 	int move_forward(int seconds = 1000);
 	int move_back(int seconds = 1000);
 	int move_right(int seconds = 1000);
@@ -51,6 +54,10 @@ class Car
 
   private:
 	//  VARIABLES
+
+	int default_speed   = 100;
+	int default_seconds = 100;
+
 	Framework framework;
 	Infrared infrared;
 

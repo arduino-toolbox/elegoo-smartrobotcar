@@ -40,43 +40,49 @@ long Infrared::check()
 	long key;
 	decode_results results;
 
-	if (irrecv.decode(&results))
+	if (!irrecv.decode(&results))
 	{
+		key = 0;
+	} else {
 		key = results.value;
 
+		framework.print("Infrared::check ");
+		
 		switch (key)
 		{
-		default:
-		case UNKNOWN:		Serial.print("UNKNOWN");	break;
+		default:		framework.print("DEFAULT");			break;
+		case UNKNOWN:	framework.print("UNKNOWN");			break;
 
-		case KEY_1:		Serial.print("1");			break;
-		case KEY_2:		Serial.print("2");			break;
-		case KEY_3:		Serial.print("3");			break;
-		case KEY_4:		Serial.print("4");			break;
-		case KEY_5:		Serial.print("5");			break;
-		case KEY_6:		Serial.print("6");			break;
-		case KEY_7:		Serial.print("7");			break;
-		case KEY_8:		Serial.print("8");			break;
-		case KEY_9:		Serial.print("9");			break;
-		case KEY_0:		Serial.print("0");			break;
+		case KEY_1:		framework.print("1      ");			break;
+		case KEY_2:		framework.print("2      ");			break;
+		case KEY_3:		framework.print("3      ");			break;
+		case KEY_4:		framework.print("4      ");			break;
+		case KEY_5:		framework.print("5      ");			break;
+		case KEY_6:		framework.print("6      ");			break;
+		case KEY_7:		framework.print("7      ");			break;
+		case KEY_8:		framework.print("8      ");			break;
+		case KEY_9:		framework.print("9      ");			break;
+		case KEY_0:		framework.print("0      ");			break;
 
-		case KEY_STAR:	Serial.print("*");			break;
-		case KEY_HASH:	Serial.print("#");			break;
+		case KEY_STAR:	framework.print("*      ");			break;
+		case KEY_HASH:	framework.print("#      ");			break;
 
-		case KEY_LEFT:	Serial.print("LEFT");		break;
-		case KEY_RIGHT:	Serial.print("RIGHT");		break;
-		case KEY_UP:	Serial.print("UP");			break;
-		case KEY_DOWN:	Serial.print("DOWN");		break;
+		case KEY_LEFT:	framework.print("LEFT   ");			break;
+		case KEY_RIGHT:	framework.print("RIGHT  ");			break;
+		case KEY_UP:	framework.print("UP     ");			break;
+		case KEY_DOWN:	framework.print("DOWN   ");			break;
 
-		case KEY_OK:	Serial.print("OK");			break;
-
+		case KEY_OK:	framework.print("OK     ");			break;
 		}
 
-		Serial.println("");
+		framework.print("  ");
 
 		//
+		framework.println("resume receiving");
+
 		irrecv.resume();
 		delay(100);
+	}
 
 	return key;
 }

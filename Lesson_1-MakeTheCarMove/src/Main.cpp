@@ -12,15 +12,15 @@ Car car;
 
 void setup(void)
 {
-  framework.setup();
-  car.setup();
+	framework.setup();
+	car.setup();
 }
 
 void loop()
 {
-  framework.blink(100);
- 
-  /* car.selftest(); */
-  
-  car.drive_auto();
+	framework.blink(100);
+
+	/* car.selftest(); */
+
+	car.drive_auto();
 }

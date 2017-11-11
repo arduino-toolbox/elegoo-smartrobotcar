@@ -22,5 +22,8 @@ void setup(void)
 
 void loop()
 {
+	car.set_default_seconds(100);
+	car.set_default_speed(100);
+	
 	car.drive_remotecontrol();
 }
