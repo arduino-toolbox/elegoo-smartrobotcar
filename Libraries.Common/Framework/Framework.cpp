@@ -40,6 +40,18 @@ int Framework::print(const char *line)
 
 	return 0;
 }
+int Framework::print(int line)
+{
+	Serial.print(line);
+
+	return 0;
+}
+int Framework::print(long line)
+{
+	Serial.print(line);
+
+	return 0;
+}
 int Framework::setstate(int state, int seconds) {
 	digitalWrite(LED_BUILTIN, state);
 	delay(seconds);

@@ -42,10 +42,10 @@ class Car
 	int set_default_speed(int speed);
 	int set_default_seconds(int seconds);
 
-	int move_forward(int seconds = 1000);
-	int move_back(int seconds = 1000);
-	int move_right(int seconds = 1000);
-	int move_left(int seconds = 1000);
+	int move_forward(int seconds = -1);
+	int move_back(int seconds = -1);
+	int move_right(int seconds = -1);
+	int move_left(int seconds = -1);
 
 	int drive_auto();
 	int drive_remotecontrol();

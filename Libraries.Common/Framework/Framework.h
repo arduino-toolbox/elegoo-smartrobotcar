@@ -24,6 +24,8 @@ class Framework
 	int setup();
 
 	int print(const char* line);
+	int print(int line);
+	int print(long line);
 
 	int println(const char* line);
 

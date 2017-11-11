@@ -54,24 +54,33 @@ int Car::setup()
 int Car::set_default_speed(int speed)
 {
 	default_speed = speed;
+
+	digitalWrite(ENA, LOW);
+	digitalWrite(ENB, LOW);
+
+	analogWrite(ENA, default_speed);
+	analogWrite(ENB, default_speed);
+
+	return default_speed;
 }
 int Car::set_default_seconds(int seconds)
 {
+	framework.print("Car::blink to ");
+	framework.print(seconds);
+
 	default_seconds = seconds;
+
+	return default_seconds;
 }
 int Car::blink(int seconds)
 {
-	Serial.println("LED.blink");
+	framework.println("Car::blink");
 
 	digitalWrite(LED_BUILTIN, HIGH);
 	delay(seconds);
 	digitalWrite(LED_BUILTIN, LOW);
 	delay(seconds);
 
-	return 0;
-}
-int Car::println(char line[])
-{
 	return 0;
 }
 int Car::move(Side side, Direction direction, int speed, int seconds)
@@ -227,6 +236,7 @@ int Car::drive_remotecontrol()
 		stop();
 		break;
 	}
+	stop();
 
 	framework.println("");
 
