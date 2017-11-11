@@ -46,7 +46,8 @@ long Infrared::check()
 	} else {
 		key = results.value;
 
-		framework.print("Infrared::check ");
+		framework.print("Infrared::check ");	
+		framework.print(key);
 		
 		switch (key)
 		{

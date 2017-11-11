@@ -53,6 +53,9 @@ int Car::setup()
 
 int Car::set_default_speed(int speed)
 {
+	framework.print("Car::set_default_speed to ");
+	framework.print(speed);
+
 	default_speed = speed;
 
 	digitalWrite(ENA, LOW);
@@ -65,7 +68,7 @@ int Car::set_default_speed(int speed)
 }
 int Car::set_default_seconds(int seconds)
 {
-	framework.print("Car::blink to ");
+	framework.print("Car::set_default_seconds to ");
 	framework.print(seconds);
 
 	default_seconds = seconds;
