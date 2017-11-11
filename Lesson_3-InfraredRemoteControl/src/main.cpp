@@ -24,5 +24,5 @@ void setup(void)
 
 void loop()
 {
-	infrared.respondtosignal();
+	infrared.dump();
 }

@@ -20,12 +20,15 @@ class Infrared
 
 	int setup();
 	int respondtosignal();
-
+	void dump();
+	
 	int println(const char *line);
 
 	int selftest();
 
   private:
+	void dump_results(decode_results *results, int withdetails = 0);
+
 	//  CONSTANTS
 	#define L	16738455
 

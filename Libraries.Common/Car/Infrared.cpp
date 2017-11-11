@@ -39,20 +39,18 @@ int Infrared::respondtosignal()
 {
 	int val;
 
-	rc=irrecv.decode(&results);
-
-	if (rc)
+	if (irrecv.decode(&results))
 	{
+		dump_results(&results);
+
 		val = results.value;
 
-		Serial.print("rc=");
-		Serial.print(rc);
 		Serial.print(" val=");
 		Serial.println(val);
 
 		irrecv.resume();
 		delay(100);
-		
+
 		if (val == L)
 		{
 			framework.println("Infrared::respondtosignal: changestate");
@@ -61,6 +59,44 @@ int Infrared::respondtosignal()
 	}
 
 	return 0;
+}
+
+void Infrared::dump_results(decode_results *results, int withdetails)
+{
+	int val=results->value;
+
+	Serial.print("decode type=");
+	Serial.print(results->decode_type);
+	Serial.print(": ");
+
+	switch (results->decode_type)
+	{
+	default:
+	case UNKNOWN:		Serial.print("UNKNOWN");		break;
+	case NEC:			Serial.print("NEC");			break;
+	case SONY:			Serial.print("SONY");			break;
+	case RC5:			Serial.print("RC5");			break;
+	case RC6:			Serial.print("RC6");			break;
+	case DISH:			Serial.print("DISH");			break;
+	case SHARP:			Serial.print("SHARP");			break;
+	case JVC:			Serial.print("JVC");			break;
+	case SANYO:			Serial.print("SANYO");			break;
+	case MITSUBISHI:	Serial.print("MITSUBISHI");		break;
+	case PANASONIC:		Serial.print("PANASONIC");		break;
+	}
+
+	Serial.print(" val="); Serial.print(val, HEX); 
+	Serial.print(" ("); Serial.print(results->bits, DEC); Serial.println(" bits)"); 
+}
+
+void Infrared::dump()
+{
+	if (irrecv.decode(&results))
+	{
+		dump_results(&results);
+
+		irrecv.resume(); // Receive the next value
+	}
 }
 
 int Infrared::selftest()
