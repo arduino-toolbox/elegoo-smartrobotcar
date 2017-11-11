@@ -17,6 +17,10 @@ int ENA = 8; /* green   */
 int N1 = 9;  /* blue     */
 int N2 = 8;  /* voilettt */
 
+//
+int PIN = 12;
+IRrecv irrecv(PIN);
+
 Car::Car()
 {
 	framework.println("Car::Car");
@@ -26,7 +30,7 @@ Car::Car()
 Car::~Car()
 {
 	framework.println("Car::~Car");
-	
+
 	// Destructor stub
 }
 
@@ -41,6 +45,9 @@ int Car::setup()
 
 	pinMode(ENA, OUTPUT);
 	pinMode(ENB, OUTPUT);
+
+	//
+	infrared.setup();
 
 	return 0;
 }
@@ -117,47 +124,88 @@ int Car::stop(int seconds)
 
 	return 0;
 }
-int Car::drive_forward(int seconds)
+int Car::move_forward(int seconds)
 {
 	return move(both, forward, 200, seconds);
 }
-int Car::drive_back(int seconds)
+int Car::move_back(int seconds)
 {
 	return move(both, back, 200, seconds);
 }
-int Car::turn_right(int seconds)
+int Car::move_right(int seconds)
 {
-	framework.println("Car::turn_right");
+	framework.println("Car::move_right");
 	return move(right, forward, 200, seconds);
 }
-int Car::turn_left(int seconds)
+int Car::move_left(int seconds)
 {
-	framework.println("Car::turn_left");
+	framework.println("Car::move_left");
 	return move(left, forward, 200, seconds);
 }
 int Car::drive_auto()
 {
 	framework.println("Car::drive_auto");
 
-	drive_forward();
+	move_forward();
 	stop();
-	turn_right();
+	move_right();
 	stop();
-	drive_forward();
+	move_forward();
 	stop();
-	turn_right();
+	move_right();
 	stop();
-	drive_forward();
+	move_forward();
 	stop();
-	turn_right();
+	move_right();
 	stop();
-	drive_forward();
+	move_forward();
 	stop();
-	turn_right();
+	move_right();
 	stop();
 
 	return 0;
 }
+
+int drive_remotecontrol()
+{
+	long key = infrared.check();
+
+	switch (key)
+	{
+	case KEY_STAR:
+		Serial.print("*");
+		//stop();
+		break;
+	case KEY_HASH:
+		Serial.print("#");
+		//stop();
+		break;
+
+	case KEY_LEFT:
+		Serial.print("LEFT");
+		//move_left();
+		break;
+	case KEY_RIGHT:
+		Serial.print("RIGHT");
+//		move_right();
+		break;
+	case KEY_UP:
+		Serial.print("UP");
+		//move_forward();
+		break;
+	case KEY_DOWN:
+		Serial.print("DOWN");
+		//move_back();
+		break;
+
+	case KEY_OK:
+		Serial.print("OK");
+		break;
+	}
+
+	return key;
+}
+
 int Car::selftest()
 {
 	int speed = 1000;

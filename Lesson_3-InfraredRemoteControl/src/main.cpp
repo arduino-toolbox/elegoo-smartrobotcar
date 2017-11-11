@@ -10,19 +10,17 @@
 Framework framework;
 Car car;
 Bluetooth bluetooth;
-Infrared infrared;
+
 
 void setup(void)
 {
 	framework.setup();
 	car.setup();
 
-	infrared.setup();
-
 	framework.println("Main");
 }
 
 void loop()
 {
-	infrared.dump();
+	car.drive_remotecontrol();
 }
