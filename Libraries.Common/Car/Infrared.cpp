@@ -30,11 +30,6 @@ int Infrared::setup()
 
 	return 0;
 }
-int Infrared::println(const char *line)
-{
-	return 0;
-}
-
 long Infrared::check()
 {
 	long key;
@@ -48,6 +43,7 @@ long Infrared::check()
 
 		framework.print("Infrared::check ");	
 		framework.print(key);
+		framework.print("=");
 		
 		switch (key)
 		{
@@ -79,8 +75,6 @@ long Infrared::check()
 		framework.print("  ");
 
 		//
-		framework.println("resume receiving");
-
 		irrecv.resume();
 		delay(100);
 	}

@@ -2,6 +2,7 @@
    Main.h
 
     Created on: 14.10.2017
+    
         Author: RalphG
 */
 
@@ -9,5 +10,3 @@
 #include <Car.h>
 #include <Bluetooth.h>
 #include <Infrared.h>
-
-

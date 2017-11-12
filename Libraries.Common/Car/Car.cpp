@@ -202,46 +202,35 @@ int Car::drive_remotecontrol()
 		return 0;
 	}
 
-	framework.print("Car::drive_remotecontrol ");
+	framework.print("Car::drive_remotecontrol key=");
 
 	switch (key)
 	{
 	default:
 		break;
-	case KEY_STAR:
-		framework.print("*: STOP ");
-		stop();
+	case KEY_STAR:		framework.println("STOP ");
+		// stop();
 		break;
-	case KEY_HASH:
-		framework.print("#: STOP ");
-		stop();
+	case KEY_HASH:		framework.println("STOP ");
+		// stop();
 		break;
-
-	case KEY_LEFT:
-		framework.print("<: LEFT ");
+	case KEY_LEFT:		framework.println("LEFT ");
 		move_left(100);
 		break;
-	case KEY_RIGHT:
-		framework.print(">: RIGHT");
+	case KEY_RIGHT:		framework.println("RIGHT");
 		move_right(100);
 		break;
-	case KEY_UP:
-		framework.print("^: UP   ");
+	case KEY_UP:		framework.println("UP   ");
 		move_forward(100);
 		break;
-	case KEY_DOWN:
-		framework.print("V: DOWN ");
+	case KEY_DOWN:		framework.println("DOWN ");
 		move_back(100);
 		break;
-
-	case KEY_OK:
-		framework.print("O: OK   ");
-		stop();
+	case KEY_OK:		framework.println("OK   ");
+		//stop();
 		break;
 	}
 	stop();
-
-	framework.println("");
 
 	return key;
 }

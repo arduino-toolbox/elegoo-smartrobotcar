@@ -16,7 +16,7 @@ void setup(void)
 {
 	framework.setup();
 	car.setup();
-	car.set_default_seconds(100);
+	car.set_default_seconds(250);
 	car.set_default_speed(100);
 
 	framework.println("Main");

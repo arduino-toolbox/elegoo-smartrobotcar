@@ -25,8 +25,6 @@ class Infrared
 	int respondtosignal();
 	void dump();
 	
-	int println(const char *line);
-
 	int selftest();
 
   private:
